@@ -1,9 +1,20 @@
 package main
 
 import "fmt"
-
-import "rsc.io/quote"
+import "time"
 
 func main() {
-    fmt.Println(quote.Go())
+    a := 20
+    var b =1
+    if a > b {
+        fmt.Println(a-b)
+    }
+
+    array := []int{1,2,3}
+    fmt.Println(array)
+
+    for i :=1; i < 10; i++ {
+        fmt.Println("hello")
+        time.Sleep(time.Second * 1)
+    }
 }
