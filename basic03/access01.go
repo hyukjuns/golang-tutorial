@@ -12,5 +12,5 @@ func main() {
 	// 소문자: 패키지 외부 접근 불가(패캐지 내부에서만 접근 가능)
 
 	fmt.Println("100 이상?: ", lib2.CheckNum1(101))
-	fmt.Println("100 이상?: ", lib2.CheckNum2(999))
+	fmt.Println("1000 이상?: ", lib2.CheckNum2(999))
 }
