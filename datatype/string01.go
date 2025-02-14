@@ -52,7 +52,7 @@ func main() {
 	fmt.Println(str22[0], str22[1], str22[2], str22[3], str22[4])
 	fmt.Println(str32[0], str32[1], str32[2], str32[3], str32[4], str32[5])
 
-	// 문자열 출력
+	// 문자 출력
 	fmt.Printf("%c %c %c %c %c %c\n", str12[0], str12[1], str12[2], str12[3], str12[4], str12[5])
 	fmt.Printf("%c %c %c %c %c\n", str22[0], str22[1], str22[2], str22[3], str22[4])
 	fmt.Printf("%c %c %c %c %c %c\n", str32[0], str32[1], str32[2], str32[3], str32[4], str32[5])
