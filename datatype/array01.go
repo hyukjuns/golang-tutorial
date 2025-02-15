@@ -4,6 +4,11 @@ import "fmt"
 
 func main() {
 
+	// Array vs Slice
+	// 길이고정 vs 길이가변
+	// 값 타입 vs 참조 타입
+	// 복사 전달  vs 참조 값 전달
+	// 비교연산자 허용 vs 비교연산자 불가
 	// Array 는 값 복사
 	arr1 := [5]int{1, 2, 3, 4, 5}
 	arr2 := arr1
