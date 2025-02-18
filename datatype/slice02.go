@@ -23,7 +23,7 @@ func main() {
 	fmt.Println(slice1)
 	fmt.Println(slice2)
 
-	// 예외
+	// out of range
 	slice3 := make([]int, 50, 100)
 	fmt.Println(slice3[4])
 	// fmt.Println(slice3[50]) // index out of range [50] with length 50
