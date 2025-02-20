@@ -1,7 +1,9 @@
 package main
 
-import "dev/pkg/datatype"
+import (
+	"dev/pkg/pointer"
+)
 
 func main() {
-	datatype.Map4()
+	pointer.Pointer01()
 }

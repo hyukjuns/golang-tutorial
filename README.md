@@ -1,11 +1,16 @@
 # golang-tutorial
 
-
-```markdown
+# Structure
 /cmd: main 함수 배치
 /pkg: 외부 호출될 소스 배치 사용
 
-Pacakge
+# Pointer
+- 변수의 지역성, 연속된 메모리 참조, 힙, 스택 등에 사용
+- 주소의 값은 직접 변경 불가능(코딩 실수로 인한 버그 방지)
+- * 표시로 포인터임을 명시
+- nil로 초기화
+
+# Pacakge
 
 1. pkg/DIR/FILE.go
     
@@ -23,17 +28,17 @@ Pacakge
     DIR.FUNCNAME()
     ```
 
-Array vs Slice
+# Array vs Slice
 - 길이고정 vs 길이가변
 - 값 타입 vs 참조 타입
 - 대입연산자: 복사 전달  vs 참조 값 전달
 - 비교연산자 허용 vs 비교연산자 불가
 - len vs len, cap
 
-Array: 
+- Array: 
     - arr1 := [5]int{1,2,3,4,5}
 
-Slice: 
+- Slice: 
     - slice1 := []int{1,2,3,4,5}
     - slice1 = append(slice1, 6, 7)
     - 용량 초과시 추가 용량은 초기 용량의 X2
@@ -44,7 +49,7 @@ Slice:
     - COPY2 참조복사 방법 2: SLICE2 = SLICE1[0:3] //  참조복사, 배열 혹은 슬라이스를 부분 추출해서 카피하면 참조 복사가 됨
     - COPY3 용량지정: SLICE2 = SLICE1[start:end:capacity] // 용량을 명시적으로 카피할 수 있음
 
-Map:
+# Map:
 Hashtable, Dictionary(Python) 형식, 즉, Key: Value 자료형
 레퍼런스 타입으로 참조값 전달
 선언은 make 함수 및 축약 방식 사용 가능
@@ -56,7 +61,7 @@ map5 := map[string]int{
 		"apple":  15,
 		"banana": 200,
 	}
-```
+
 
 ## References
 [Standard Go Project Layout](https://github.com/golang-standards/project-layout/blob/master/README_ko.md)
