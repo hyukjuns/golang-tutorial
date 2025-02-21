@@ -4,11 +4,27 @@
 /cmd: main 함수 배치
 /pkg: 외부 호출될 소스 배치 사용
 
+# Function
+```go
+- func Test() {}
+- func Test() RETURN_TYPE {}
+- func Test{VAR_NAME VAR_TYPE} {}
+- func Test(VAR_NAME VAR_TYPE) RETURN_TYPE {}
+- func Test(VAR_NAME VAR_TYPE) (RETURN_TYPE,RETURN_TYPE) {} // 멀티 리턴
+- func Test(VAR_NAME VAR_TYPE) (RETURN_VAR_NAME_1 RETURN_TYPE,- RETURN_VAR_NAME_2 RETURN_TYPE) {} // 리턴값 이름 지정
+- func Test(VAR_NAME VAR_TYPE, ARG_FUNC) (RETURN_TYPE,RETURN_TYPE) {} // 함수를 인자로 받음
+- func Test(VAR_NAME ...VAR_TYPE) RETURN_TYPE {} // 가변 매개변수
+```
+
+
 # Pointer
 - 변수의 지역성, 연속된 메모리 참조, 힙, 스택 등에 사용
 - 주소의 값은 직접 변경 불가능(코딩 실수로 인한 버그 방지)
 - * 표시로 포인터임을 명시
 - nil로 초기화
+- 함수 매개변수는 기본적으로 지역 변수로 값 복사
+- 원본 변수값 변경을 위해서 포인터로 전달
+- 크기가 큰 배열의 경우 값 복사시 리소스 부하 -> 포인터 전달을 통해 참조형식으로 리소스 부하 해결
 
 # Pacakge
 
