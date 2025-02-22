@@ -17,3 +17,11 @@ func PrtWord(msg ...string) string {
 	}
 	return result
 }
+
+func PrtWord2(msg ...string) (r1 string) {
+
+	for _, message := range msg {
+		r1 += message
+	}
+	return r1
+}
