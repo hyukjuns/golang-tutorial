@@ -5,8 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
-
+func funcSample() {
 	fmt.Println(functest.Multiply(1, 2, 3))
 	fmt.Println(functest.PrtWord2("h", "e", "l", "l", "o"))
 
@@ -44,5 +43,16 @@ func main() {
 
 	fmt.Println("익명 함수")
 	functest.AnonymousFunc()
-
+}
+func funcSampleDefer() {
+	functest.Defer1()
+	functest.Defer3("Defer Tests")
+	functest.Stack()
+	functest.DupleFunc()
+}
+func closureSample() {
+	functest.ClosureTest2()
+}
+func main() {
+	closureSample()
 }
