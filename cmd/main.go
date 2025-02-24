@@ -2,6 +2,7 @@ package main
 
 import (
 	"dev/pkg/functest"
+	"dev/pkg/structtest"
 	"fmt"
 )
 
@@ -54,5 +55,5 @@ func closureSample() {
 	functest.ClosureTest2()
 }
 func main() {
-	closureSample()
+	structtest.UserType4()
 }
