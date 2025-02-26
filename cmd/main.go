@@ -55,5 +55,5 @@ func closureSample() {
 	functest.ClosureTest2()
 }
 func main() {
-	structtest.UserType4()
+	structtest.StructTest6()
 }
