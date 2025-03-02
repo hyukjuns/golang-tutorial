@@ -1,104 +1,125 @@
 # golang-tutorial
 
-# Structure
+## Directory Structure
 /cmd: main 함수 배치
 /pkg: 외부 호출될 소스 배치 사용
 
-# Struct
-Golang은 객체지향 타입을 구조체로 정의 (클래스, 상속 개념 없음)
+## Grammar
+### Interface
 
-상태, 메소드를 분리해서 정의(결합성 없음)
+![](/concepts/interface.png)
 
-사용자 정의 타입: 구조체, 인터페이스, 기본타입, 함수 
+인터페이스에는 메소드만 구현하고, 해당 인터페이스의 메소드들을 리시버 함수로 갖는 구조체들은 모두 해당 인터페이스로 호출할 수 있으며 이를 덕타이핑 이라 부름 (오리처럼 걷고, 짖고, 헤엄치는 것은 오리라고 본다는 뜻)
 
-구조체와 메서드간 연견을 통해서 타 언어의 클래스 형식처럼 사용 가능(객체지향적)
+*덕타이핑: 구조체 및 변수의 값이나 타입은 상관하지 않고 오로지 구현된 메소드로만 판단하는 방식
 
-리시버 전달(값, 참조 형식)
-함수는 기본적으로 값 호출 -> 변수의 값이 복사 된 후 내부 전달(원본수정x) -> 맵, 슬라이스 등은 참조전달
-리시버(구조체)도 마찬가지로 포인터를 활용해서 메소드 내에서 원본 수정 가능
-	
+인터페이스의 메소드를 리시버 함수로 구현한 구조체는 해당 인터페이스로서 사용될 수 있게됨
 
+즉, 인터페이스는 객체의 동작과 골격을 표현하고 단순히 동작에 대한 방법만 묘사하므로 추상화를 제공한다고 볼 수 있고, 이로써 프로그래밍의 유연성이 좋아지게됨
 
-# Function
-- Closure: 외부함수의 변수를 참조하는 익명함수를 리턴하는 함수 호출시 클로져가 생성됨, 클로저는 외부함수의 지역변수를 캡쳐하여 객체로서 메모리에 상주시키고, 객체화된 외부 지역변수를 계속해서 사용할 수 있음 (비동기작업, 누적함수에 사용됨, 메모리 누수 주의)
-- Defer: 함수 호출시 실행 지연기능, Defer로 호출한 함수는 메인 쓰레드가 종료되기 직전에 호출된다(finally와 유사)
-- 함수를 함수의 인자로 받아서 사용 가능
-- 변수(슬라이스,맵,변수)에 함수 할당 가능
-- 재귀호출, 즉시실행함수(익명함수) 사용 가능
-- 선언방식
+만약 빈 인터페이스를 사용할 경우 Type Assertion(타입 변환)을 통해 타입 변환 후 사용해야 함
+
+`interfaceValue.(type)`
+
 ```go
-- func Test() {}
-- func Test() RETURN_TYPE {}
-- func Test{VAR_NAME VAR_TYPE} {}
-- func Test(VAR_NAME VAR_TYPE) RETURN_TYPE {}
-- func Test(VAR_NAME VAR_TYPE) (RETURN_TYPE,RETURN_TYPE) {} // 멀티 리턴
-- func Test(VAR_NAME VAR_TYPE) (RETURN_VAR_NAME_1 RETURN_TYPE,- RETURN_VAR_NAME_2 RETURN_TYPE) {} // 리턴값 이름 지정
-- func Test(VAR_NAME VAR_TYPE, ARG_FUNC) (RETURN_TYPE,RETURN_TYPE) {} // 함수를 인자로 받음
-- func Test(VAR_NAME ...VAR_TYPE) RETURN_TYPE {} // 가변 매개변수
+type INTERFACENAME interface {
+    method1() RETURNTYPE
+    method2()
+}
 ```
 
+### Struct
 
-# Pointer
-- 변수의 지역성, 연속된 메모리 참조, 힙, 스택 등에 사용
-- 주소의 값은 직접 변경 불가능(코딩 실수로 인한 버그 방지)
-- * 표시로 포인터임을 명시
-- nil로 초기화
-- 함수 매개변수는 기본적으로 지역 변수로 값 복사
-- 원본 변수값 변경을 위해서 포인터로 전달
-- 크기가 큰 배열의 경우 값 복사시 리소스 부하 -> 포인터 전달을 통해 참조형식으로 리소스 부하 해결
+Golang의 객체지향 타입은 구조체로 정의할 수 있으며 타 언어와 비교하면 클래스, 상속 개념은 없지만 상태와 메소드를 분리해서 정의하고 사용할 수 있음 (결합성 없음)
+즉, 구조체와 메서드간 연견을 통해서 타 언어의 클래스 형식처럼 사용 가능(객체지향적)
 
-# Pacakge
+사용자 정의 타입은 사용자가 임의로 선언한 타입 생성 방식이며 Golang이 제공하는 구조체, 인터페이스, 기본타입, 함수 등 다양한 타입을 임의의 타입으로 재구성하여 사용할 수 있도록 함
 
-1. pkg/DIR/FILE.go
+Receiver는 구조체와 연결된 함수를 의미하며 연결된 구조체의 메소드처럼 사용 가능함, 리시버도 일반 함수와 마찬가지로 구조체의 포인터를 전달해서 실제 원본의 값을 수정할 수 있음
+
+또한, 구조체 임베디드 패턴을 사용하여 메소드 오버라이딩을 구성할 수 있음
+
+### Function (함수)
+
+Closure: 외부함수의 변수를 참조하는 익명함수를 리턴하는 함수 호출시 클로져가 생성됨, 클로저는 외부함수의 지역변수를 캡쳐하여 객체로서 메모리에 상주시키고, 객체화된 외부 지역변수를 계속해서 사용할 수 있음 (비동기작업, 누적함수에 사용됨, 메모리 누수 주의)
+
+Defer: 함수 호출시 실행을 지연시키는 기능, Defer로 호출한 함수는 메인 쓰레드가 종료되기 직전에 호출됨(finally와 유사하며, Stack으로 생각하면 이해하기 쉬움)
+
+익명함수: 함수 선언과 동시에 실행 되는 함수로서 클로저의 밑바탕이 됨
+
+기타 함수의 매개변수는 함수, 일반 변수 등 다양하게 사용 가능하고, 리턴값이 여러개일 수 있음
+
+참고로 함수의 첫글자가 대문자이면 퍼블릭, 소문자이면 프라이빗 함수로 선언됨
+
+### Pointer
+원본 변수의 메모리 주소를 담고 있는 자료형
+
+"*" 표시로 포인터임을 명시하며, 참조전달을 위해 자주 사용됨, Golang에서는 포인터를 사용한 메모리 주소 변경은 불가능함
+
+사용 사례 로는 만약 크기가 큰 배열을 함수로 전달해야하는 경우 값 전달은 변수가 복사되므로 메모리가 낭비되지만, 포인터로 넘기면 참조형식이므로 메모리 부하를 상대적으로 줄일 수 있음
+
+### Pacakge 구조
+메인 함수에서 외부 패키지 함수를 호출할 경우 아래 스텝으로 진행
+
+1. 현재 작업 디렉토리에서 Module 초기화, go.mod 생성됨
+
+```bash
+go mod init MODULE
+```
+
+2. 패키지 함수 작성
+
+Path: pkg/DIR/FILE.go
     
-    ```go
-    package DIR
-    func Funcname() // 함수 첫 단어는 대문자(퍼블릭 함수)
-    ```
+```go
+package DIR // 디렉터리 이름
+func Funcname() // 함수 첫 단어는 대문자로 선언하여 외부에서 참조되도록 구현 (퍼블릭 함수)
+```
 
-2. go mod init MODULE
+3. 메인함수에서 호출하여 사용
 
-3. cmd/main.go
+cmd/main.go
 
-    ```go
-    import MODLUE/pkg/DIR
-    DIR.FUNCNAME()
-    ```
+```go
+import MODLUE/pkg/DIR // 모듈명/pkg/디렉터리
+DIR.FUNCNAME()
+```
 
-# Array vs Slice
-- 길이고정 vs 길이가변
-- 값 타입 vs 참조 타입
-- 대입연산자: 복사 전달  vs 참조 값 전달
-- 비교연산자 허용 vs 비교연산자 불가
-- len vs len, cap
+### Array vs Slice
+Array: 길이 고정, 대입 연산시 값 복사됨, len 개념 존재
 
-- Array: 
-    - arr1 := [5]int{1,2,3,4,5}
+```go
+arr1 := [5]int{1,2,3,4,5} // 선언
+```
 
-- Slice: 
-    - slice1 := []int{1,2,3,4,5}
-    - slice1 = append(slice1, 6, 7)
-    - 용량 초과시 추가 용량은 초기 용량의 X2
-    - 정렬확인: sort.IntsAreSorted(SLICE) // bool
-    - 정렬: sort.Ints(SLICE) | sort.Strings(SLICE)
-    - COPY 전제조건: make로 만든 슬라이스만 카피 가능 (용량이 지정되어 있는 슬라이스만 카피 가능)
-    - COPY 슬라이스 값복사 방법: copy(slice2, slice1) // slice2의 용량이 5이기때문에, 5까지만 복사함
-    - COPY2 참조복사 방법 2: SLICE2 = SLICE1[0:3] //  참조복사, 배열 혹은 슬라이스를 부분 추출해서 카피하면 참조 복사가 됨
-    - COPY3 용량지정: SLICE2 = SLICE1[start:end:capacity] // 용량을 명시적으로 카피할 수 있음
+Slice: 길이 가변, 대입 연산시 참조(주소값)이 전달됨, len, cap 개념 존재
 
-# Map:
-Hashtable, Dictionary(Python) 형식, 즉, Key: Value 자료형
-레퍼런스 타입으로 참조값 전달
-선언은 make 함수 및 축약 방식 사용 가능
-순서 없음
-축약 선언 예시:
-map3 := make(map[string]int)
-초기화 선언 예시:
-map5 := map[string]int{
+len, cap: len은 슬라이스의 길이, cap은 슬라이스의 용량, cap이 있음으로서 메모리 주소공간의 낭비를 막을 수 있고, 만약 슬라이스가 확장되면서 cap 용량이  초과되면 추가 용량은 초기 용량의 x2로 늘어남
+
+```go
+// 선언
+slice1 := []int{1,2,3,4,5}
+slcie2 := make([]int, 50, 100) // make(슬라이스 자료형, len, cap)
+// 슬라이스 확장
+slice3 = append(slice1, 6, 7)
+slice3 = append(slice1, slice2...)
+// 참조복사
+slice2 = slice1[start:end:capacity]
+// 슬라이스의 값 복사 방법
+copy(slice2, slice1)
+```
+
+### Map
+Golang의 Key: Value 자료형으로서 순서가 없는 자료형 이며 Hashtable, Dictionary(Python) 형식으로 사용되고 대입 연산시 참조값이 전달됨
+
+```go
+// map[KEY]VALUE
+map1 := make(map[string]int)
+map2 := map[string]int {
 		"apple":  15,
 		"banana": 200,
 	}
-
+```
 
 ## References
 [Standard Go Project Layout](https://github.com/golang-standards/project-layout/blob/master/README_ko.md)

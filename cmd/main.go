@@ -2,7 +2,7 @@ package main
 
 import (
 	"dev/pkg/functest"
-	"dev/pkg/structtest"
+	"dev/pkg/interfacetest"
 	"fmt"
 )
 
@@ -55,5 +55,5 @@ func closureSample() {
 	functest.ClosureTest2()
 }
 func main() {
-	structtest.StructTest6()
+	interfacetest.InterfaceTest2()
 }
