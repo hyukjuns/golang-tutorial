@@ -2,9 +2,15 @@ package main
 
 import (
 	"dev/pkg/functest"
-	"dev/pkg/interfacetest"
+	"dev/pkg/goroutine"
 	"fmt"
 )
+
+func main() {
+	// goroutine.Channel3()
+	// fmt.Println()
+	goroutine.Channel6()
+}
 
 func funcSample() {
 	fmt.Println(functest.Multiply(1, 2, 3))
@@ -53,7 +59,4 @@ func funcSampleDefer() {
 }
 func closureSample() {
 	functest.ClosureTest2()
-}
-func main() {
-	interfacetest.InterfaceTest2()
 }
