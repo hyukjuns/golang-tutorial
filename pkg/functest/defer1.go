@@ -35,7 +35,7 @@ func Stack() {
 	}
 }
 
-// 중첩함수느 먼저 실행됨
+// 중첩함수는 먼저 실행됨
 func DupleFunc() {
 	defer end(start("hey"))
 	fmt.Println("You are in DupleFunc")

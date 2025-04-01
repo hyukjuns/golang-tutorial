@@ -5,6 +5,24 @@
 /pkg: 외부 호출될 소스 배치 사용
 
 ## Grammar
+### Gorutine, Mutex
+순차적인 main 함수 흐름에서 벗어난 병렬 실행 흐름을 Gorutine으로 만들수 있음, 고루틴 사용시 공유 데이터 동기화에 문제가 발생할 수 있는데, 이때 Mutex를 사용하면 개별 실행 흐름에서 공유 데이터 동기화를 위한 데이터 제어가 가능해짐
+
+### Mutex
+고루틴 사용시 데이터 동기화(타이밍, 싱크)를 위해 사용
+RWMutex(읽기/쓰기 뮤텍스 잠금), RMutex(읽기 뮤텍스 잠금)가 존재
+```
+# Mutex
+mutex := new(sync.Mutex)
+# RWMutex
+mutex := new(sync.RWMutex)
+# RMutex
+mutex := new(sync.RMutex)
+
+# 동기화 상태(조건) 메소드
+wait, sigal, broadcast
+```
+
 ### Goroutine
 타 언어의 쓰레드 개념, 생성방법이 매우 간단(go 예약어)하며 리소스를 매우 적게 사용함(수많은 고루틴 동시 생성 및 실행 가능)
 비동기적 함수 루틴 실행에 사용함 (함수간에는 채널을 통해 통신함)
