@@ -4,7 +4,15 @@
 /cmd: main 함수 배치
 /pkg: 외부 호출될 소스 배치 사용
 
-## Grammar
+## Go 병행처리
+### Sync, 원자성
+고루틴 흐름을 직접 관리, Do-Once, Add-Done-Wait 활용하여 흐름을 직접 관리
+
+원자성: 기능적으로 분할 불가능한 완정 보증된 일련의 조작, 모두 성공 or 모두 실패, pkg: sync/atomic 에서 원자적 연산자 제공, 주로 공용변수에 관한 계산에서 사용
+
+*A WaitGroup waits for a collection of goroutines to finish. 
+https://pkg.go.dev/sync#WaitGroup
+
 ### Gorutine, Mutex
 순차적인 main 함수 흐름에서 벗어난 병렬 실행 흐름을 Gorutine으로 만들수 있음, 고루틴 사용시 공유 데이터 동기화에 문제가 발생할 수 있는데, 이때 Mutex를 사용하면 개별 실행 흐름에서 공유 데이터 동기화를 위한 데이터 제어가 가능해짐
 
@@ -64,6 +72,7 @@ for i := range ch {
 ```go
 go FunctionName()
 ```
+## Go 객체지향
 ### Interface
 
 ![](/concepts/interface.png)
