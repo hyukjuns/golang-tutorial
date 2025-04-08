@@ -4,6 +4,9 @@
 /cmd: main 함수 배치
 /pkg: 외부 호출될 소스 배치 사용
 
+### Error Handling
+[Error Interface](https://github.com/hyukjuns/golang-tutorial.git)
+
 ## Go 병행처리
 ### Sync, 원자성
 고루틴 흐름을 직접 관리, Do-Once, Add-Done-Wait 활용하여 흐름을 직접 관리
