@@ -6,8 +6,11 @@
 
 ### Error Handling
 [Error Interface](https://github.com/hyukjuns/golang-tutorial.git)
+- panic: 예외발생시킴
+- recover: defer 안에 선언하고 예외상황 발생시 에러메시지가 들어오고, 복구처리 로직을 정의함
 
 ## Go 병행처리
+
 ### Sync, 원자성
 고루틴 흐름을 직접 관리, Do-Once, Add-Done-Wait 활용하여 흐름을 직접 관리
 
