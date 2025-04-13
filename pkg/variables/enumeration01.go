@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Enum1() {
 	const (
 		Jan = 1
 		Feb = 2

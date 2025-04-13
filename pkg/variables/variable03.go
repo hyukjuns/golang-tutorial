@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Var3() {
 	// short decalare variable
 	// in function
 

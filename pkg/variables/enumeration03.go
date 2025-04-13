@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Enum3() {
 
 	const (
 		_ = iota

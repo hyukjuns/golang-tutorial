@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Var2() {
 
 	var (
 		name      string = "machine"

@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Const2() {
 
 	const a, b int = 10, 90
 	const c, d, e = true, 0.64, "test"

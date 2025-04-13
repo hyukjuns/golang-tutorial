@@ -1,8 +1,8 @@
-package main
+package variables
 
 import "fmt"
 
-func main() {
+func Const1() {
 	// 상수
 	const a string = "Test1"
 	const b = "Test2"
