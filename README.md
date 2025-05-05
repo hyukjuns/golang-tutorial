@@ -2,7 +2,13 @@
 
 ## Directory Structure
 /cmd: main 함수 배치
-/pkg: 외부 호출될 소스 배치 사용
+/pkg: 외부에서 참조할 패키지 배치
+
+### 외부 패키지 사용
+```
+go get  PACKAGE_ADDRESS
+import PACKAGE_ADDRESS
+```
 
 ### Error Handling
 [Error Interface](https://github.com/hyukjuns/golang-tutorial.git)
