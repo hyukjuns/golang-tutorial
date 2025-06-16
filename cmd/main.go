@@ -1,10 +1,10 @@
 package main
 
 import (
-	"dev/pkg/fileio"
+	"dev/pkg/basic01"
 )
 
 func main() {
-	fileio.FileTest()
-	fileio.FileTest2()
+	basic01.Feature01()
+	basic01.For03()
 }
