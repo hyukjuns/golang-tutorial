@@ -1,10 +1,8 @@
 package main
 
-import (
-	"dev/pkg/basic01"
-)
+import "dev/grammers/basic"
 
 func main() {
-	basic01.Feature01()
-	basic01.For03()
+	basic.Feature01()
+	basic.For03()
 }
