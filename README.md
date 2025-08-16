@@ -1,12 +1,15 @@
-# golang-tutorial
+# golang
 
-## Directory Structure
-/cmd: main 함수 배치
-/pkg: 외부에서 참조할 패키지 배치
+### Directory Structure
+
+[Standard Go Project Layout](https://github.com/golang-standards/project-layout/blob/master/README_ko.md)
+
+- /cmd: main 함수 배치
+- /pkg: 외부에서 참조할 패키지 배치
 
 ### 외부 패키지 사용
-```
-go get  PACKAGE_ADDRESS
+```bash
+go get PACKAGE_ADDRESS
 import PACKAGE_ADDRESS
 ```
 
@@ -15,23 +18,19 @@ import PACKAGE_ADDRESS
 - panic: 예외발생시킴
 - recover: defer 안에 선언하고 예외상황 발생시 에러메시지가 들어오고, 복구처리 로직을 정의함
 
-## Go 병행처리
-
 ### Sync, 원자성
 고루틴 흐름을 직접 관리, Do-Once, Add-Done-Wait 활용하여 흐름을 직접 관리
 
 원자성: 기능적으로 분할 불가능한 완정 보증된 일련의 조작, 모두 성공 or 모두 실패, pkg: sync/atomic 에서 원자적 연산자 제공, 주로 공용변수에 관한 계산에서 사용
 
-*A WaitGroup waits for a collection of goroutines to finish. 
-https://pkg.go.dev/sync#WaitGroup
+[A WaitGroup waits for a collection of goroutines to finish.](https://pkg.go.dev/sync#WaitGroup)
 
 ### Gorutine, Mutex
 순차적인 main 함수 흐름에서 벗어난 병렬 실행 흐름을 Gorutine으로 만들수 있음, 고루틴 사용시 공유 데이터 동기화에 문제가 발생할 수 있는데, 이때 Mutex를 사용하면 개별 실행 흐름에서 공유 데이터 동기화를 위한 데이터 제어가 가능해짐
 
-### Mutex
-고루틴 사용시 데이터 동기화(타이밍, 싱크)를 위해 사용
+Mutex: 고루틴 사용시 데이터 동기화(타이밍, 싱크)를 위해 사용
 RWMutex(읽기/쓰기 뮤텍스 잠금), RMutex(읽기 뮤텍스 잠금)가 존재
-```
+```go
 # Mutex
 mutex := new(sync.Mutex)
 # RWMutex
@@ -48,19 +47,15 @@ wait, sigal, broadcast
 비동기적 함수 루틴 실행에 사용함 (함수간에는 채널을 통해 통신함)
 공유 메모리 사용 시 정확한 동기화 코딩이 필요하고, 싱글루틴에 비해 항상 빠른 처리 결과는 아니다.
 
-채널(Channel)
-채널은 동기적으로 실행됨, 레퍼런스타입 값 전달(참조전달)
-고루틴간에 상호 정보(데이터) 교환 및 실행 흐름 동기화를 위해 사용
-실행 흐름 제어 가능(동기, 비동기), 일반 변수로 선언 후 사용 가능
-데이터 전달 자료형 선언 후 사용(지정된 타입만 주고 받을 수 있음)
-interface{} 전달을 통해 자료형 상관없이 전송 및 수신 가능, 포인터(슬리이스, 맵)을 전달하는 경우 주의
-멀티프로세싱 처리에서 교착상태(경합) 발생 주의
-
-채널간 통신시 버퍼를 사용하여 비동기 처리가능(큐 처럼 사용)
-(수신과 송신에 버퍼(큐) 사용)
-`ch := make(chan bool, 4)`
-
-close로 채널을 닫기 전까지, range로 채널의 값을 읽을 수 있음
+### 채널(Channel)
+- 채널은 동기적으로 실행됨, 레퍼런스타입 값 전달(참조전달)
+- 고루틴간에 상호 정보(데이터) 교환 및 실행 흐름 동기화를 위해 사용
+- 실행 흐름 제어 가능(동기, 비동기), 일반 변수로 선언 후 사용 가능
+- 데이터 전달 자료형 선언 후 사용(지정된 타입만 주고 받을 수 있음) 
+- interface{} 전달을 통해 자료형 상관없이 전송 및 수신 가능, 포인터(슬리이스, 맵)을 전달하는 경우 주의
+- 멀티프로세싱 처리에서 교착상태(경합) 발생 주의
+- 채널간 통신시 버퍼를 사용하여 비동기 처리가능(큐 처럼 사용, 수신과 송신에 버퍼(큐) 사용) `ch := make(chan bool, 4)`
+- close로 채널을 닫기 전까지, range로 채널의 값을 읽을 수 있음
 ```go
 ch := make(chan bool)
 go func() {
@@ -74,17 +69,10 @@ go func() {
 for i := range ch {
 	fmt.Println(i)
 }
-```
 
-```bash
 송신: 채널 <- 데이터
 수신:     <- 채널
 ```
-
-```go
-go FunctionName()
-```
-## Go 객체지향
 ### Interface
 
 ![](/concepts/interface.png)
@@ -136,10 +124,10 @@ Defer: 함수 호출시 실행을 지연시키는 기능, Defer로 호출한 함
 
 "*" 표시로 포인터임을 명시하며, 참조전달을 위해 자주 사용됨, Golang에서는 포인터를 사용한 메모리 주소 변경은 불가능함
 
-사용 사례 로는 만약 크기가 큰 배열을 함수로 전달해야하는 경우 값 전달은 변수가 복사되므로 메모리가 낭비되지만, 포인터로 넘기면 참조형식이므로 메모리 부하를 상대적으로 줄일 수 있음
+사용사례로는 만약 크기가 큰 배열을 함수로 전달해야하는 경우 값 전달은 변수가 복사되므로 메모리가 낭비되지만, 포인터로 넘기면 참조형식이므로 메모리 부하를 상대적으로 줄일 수 있음
 
 ### Pacakge 구조
-메인 함수에서 외부 패키지 함수를 호출할 경우 아래 스텝으로 진행
+메인 함수에서 외부 패키지 함수를 호출할 경우, 모듈명/디렉터리경로 를 import한 후에, 함수 이름을 호출하여 사용
 
 1. 현재 작업 디렉토리에서 Module 초기화, go.mod 생성됨
 
@@ -149,7 +137,7 @@ go mod init MODULE
 
 2. 패키지 함수 작성
 
-Path: pkg/DIR/FILE.go
+`Path: pkg/DIR/FILE.go`
     
 ```go
 package DIR // 디렉터리 이름
@@ -158,7 +146,7 @@ func Funcname() // 함수 첫 단어는 대문자로 선언하여 외부에서 �
 
 3. 메인함수에서 호출하여 사용
 
-cmd/main.go
+`cmd/main.go`
 
 ```go
 import MODLUE/pkg/DIR // 모듈명/pkg/디렉터리
