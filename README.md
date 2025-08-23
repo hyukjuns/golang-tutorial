@@ -127,22 +127,12 @@ Defer: 함수 호출시 실행을 지연시키는 기능, Defer로 호출한 함
 사용사례로는 만약 크기가 큰 배열을 함수로 전달해야하는 경우 값 전달은 변수가 복사되므로 메모리가 낭비되지만, 포인터로 넘기면 참조형식이므로 메모리 부하를 상대적으로 줄일 수 있음
 
 ### Pacakge 구조
-메인 함수에서 외부 패키지 함수를 호출할 경우, 모듈명/디렉터리경로 를 import한 후에, 함수 이름을 호출하여 사용
-
-1. 현재 작업 디렉토리에서 Module 초기화, go.mod 생성됨
-
-```bash
-go mod init MODULE
-```
-
-2. 패키지 함수 작성
-
-`Path: pkg/DIR/FILE.go`
-    
+code는 package로 그룹화, package는 module로 그룹화
 ```go
-package DIR // 디렉터리 이름
-func Funcname() // 함수 첫 단어는 대문자로 선언하여 외부에서 참조되도록 구현 (퍼블릭 함수)
+import module/package
+package.Function()
 ```
+
 
 3. 메인함수에서 호출하여 사용
 
