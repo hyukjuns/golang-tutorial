@@ -133,16 +133,6 @@ import module/package
 package.Function()
 ```
 
-
-3. 메인함수에서 호출하여 사용
-
-`cmd/main.go`
-
-```go
-import MODLUE/pkg/DIR // 모듈명/pkg/디렉터리
-DIR.FUNCNAME()
-```
-
 ### Array vs Slice
 Array: 길이 고정, 대입 연산시 값 복사됨, len 개념 존재
 
